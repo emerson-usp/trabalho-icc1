@@ -5,6 +5,7 @@
 //structs
 typedef struct
 {
+    int codigo;
     char *nome; //Nome do produto
     double preco; // Preço do produto
     int quant; //Quantidade do produto
@@ -14,11 +15,12 @@ typedef struct
 //param:
 /*
 @*prod = array de produtos do estoque
+@codigo = código de identificação do produto
 @*nome = string com nome do produto
 @quant = quantidade de produtos que deve ser inserida no estoque
 @preco = preço do produto que está sendo inserido
 */
-int insert(produto *prod, char *nome, int quant, double preco)
+int insert(produto *prod, int cod, char *nome, int quant, double preco)
 {
     if(prod == NULL || nome == NULL)
     {
@@ -44,6 +46,7 @@ int insert(produto *prod, char *nome, int quant, double preco)
 
     strcpy(prod->nome, nome);
 
+    prod->codigo = cod;
     prod->preco = preco;
     prod->quant = quant;
     return 0;
@@ -56,6 +59,7 @@ int insert(produto *prod, char *nome, int quant, double preco)
 */
 int salvarBackup(FILE *arquivo, produto *prod)
 {
+    fprintf(arquivo, "%d\n", prod->codigo);
     fprintf(arquivo, "%s\n", prod->nome);
     fprintf(arquivo, "%lf\n", prod->preco);
     fprintf(arquivo, "%d\n", prod->quant);
@@ -114,14 +118,16 @@ int main()
     char *name = malloc(99*sizeof(char));
     double preco = 4.0;
     int quant = 2;
+    int codigo = 0;
 
     strcpy(name, "teste");
 
-    insert(&estoque[0], name, quant, preco);
+    insert(&estoque[0], codigo, name, quant, preco);
 
     quant = 1;
+    codigo++;
 
-    insert(&estoque[1], name, quant, preco);
+    insert(&estoque[1], codigo, name, quant, preco);
     //print(&estoque[0]);
 
     if(geraBackup(estoque, 2)) return 1;
