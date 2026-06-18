@@ -77,7 +77,7 @@ Parâmetros:
 */
 void consultarSaldo(double saldo)
 {
-  printf("%.2lf\n", saldo);
+  printf("Saldo: %.2lf\n", saldo);
   printf("--------------------------------------------------");
 }
 
@@ -92,7 +92,7 @@ int main()
   //Variável para verificar se é a primeira execução.
   int existia = 0;
 
-  //Variável de controle do código do produto.
+  //Variável de controle do código dos produtos.
   int codigoAtual = 0;
 
   //Leitura e verificação do arquivo de backup.
