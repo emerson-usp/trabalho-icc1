@@ -140,7 +140,6 @@ int main()
 
     if(strcmp(comando, "IP") == 0)
     {
-    
       char nomeTemp[100];
       int quantTemp;
       double precoTemp;
@@ -148,9 +147,10 @@ int main()
       //Verifica se o estoque existia antes da execução e realoca o tamanho do estoque.
       if(existia == 1)
       {
+        tamEstoque++;
         estoque = realloc(estoque, tamEstoque * sizeof(produto));
 
-        scanf(" %s %lf %d", nomeTemp, &precoTemp, &quantTemp);
+        scanf(" %s %d %lf", nomeTemp, &quantTemp, &precoTemp);
 
         insert(&estoque[codigoAtual], codigoAtual, nomeTemp, quantTemp, precoTemp);
 
@@ -158,9 +158,9 @@ int main()
       }
       else if(existia == 0)
       {
-        scanf(" %s %lf %d", nomeTemp, &precoTemp, &quantTemp);
+        scanf(" %s %d %lf", nomeTemp, &quantTemp, &precoTemp);
 
-        insert(&estoque[codigo], codigoAtual, nomeTemp[100], precoTemp, quantTemp);
+        insert(&estoque[codigoAtual], codigoAtual, nomeTemp[100], quantTemp, precoTemp);
 
         codigoAtual++;
       }
